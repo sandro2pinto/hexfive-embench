@@ -3,16 +3,13 @@ Micro-benchmark for embedded systems
 
 Hex Five's test cases for inclusion in David Patterson's emBench project https://github.com/embench
 
-  - ctx_switch
-
+* ctx_switch
   Coming soon ...
 
-  - irq_latency
-
+* irq_latency
   Coming soon ...
 
-  - crypto
-
+* crypto
   Coming soon ...
 
   
