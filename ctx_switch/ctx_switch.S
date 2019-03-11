@@ -32,7 +32,7 @@ _start:
 		li a0, 1 << 3; csrw mstatus, a0
 
 		# initialize threads
-        la a0, ctx_base;
+		la a0, ctx_base;
 		la a1, thread0; sw a1, 0*ctx_size(a0)
 		la a1, thread1; sw a1, 1*ctx_size(a0)
 		la a1, thread2; sw a1, 2*ctx_size(a0)
