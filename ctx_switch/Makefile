@@ -1,13 +1,15 @@
 # Copyright(C) 2019 Hex Five Security, Inc.
 # 10-MAR-2019 Cesare Garlati
 
-TARGET := embench.elf
+TARGET := ctx_switch.elf
 LINKER_SCRIPT := $(BSP_DIR)/flash.lds
 
 .PHONY: all
 all: $(TARGET)
 
-ASM_SRCS += embench.S
+ASM_SRCS += ctx_switch.S
+INCLUDES += -I$(BSP_DIR)
+
 ASM_OBJS := $(ASM_SRCS:.S=.o)
 
 CFLAGS += -march=$(RISCV_ARCH)
@@ -32,6 +34,9 @@ $(TARGET): $(LINK_OBJS) $(LINK_DEPS)
 	$(OBJDUMP) --all-headers --demangle --disassemble --file-headers --wide -D $(TARGET) > $(LST)
 
 $(ASM_OBJS): %.o: %.S $(HEADERS)
+	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
+
+$(C_OBJS): %.o: %.c $(HEADERS)
 	$(CC) $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
 .PHONY: clean

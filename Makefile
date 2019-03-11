@@ -90,7 +90,7 @@ GDB_LOAD_CMDS += -ex "quit"
 .PHONY: load
 load:
 	$(OPENOCD) $(OPENOCDARGS) & \
-	$(GDB) $(TEST)/embench.hex $(GDB_LOAD_ARGS) $(GDB_LOAD_CMDS)
+	$(GDB) $(TEST)/$(TEST).hex $(GDB_LOAD_ARGS) $(GDB_LOAD_CMDS)
 
 #############################################################
 # Run benchmark
@@ -98,12 +98,14 @@ load:
 
 GDB_RUN_ARGS ?= --batch
 GDB_RUN_CMDS += -ex "target extended-remote localhost:$(GDB_PORT)"
-GDB_RUN_CMDS += -ex "p/x $a0"
+#GDB_RUN_CMDS += -ex "shell clear"
+GDB_RUN_CMDS += -ex "jump _start"
+GDB_RUN_CMDS += -ex 'p $$mhpmcounter4'
 GDB_RUN_CMDS += -ex "monitor shutdown"
 GDB_RUN_CMDS += -ex "quit"
 
 .PHONY: run
 run:
 	$(OPENOCD) $(OPENOCDARGS) & \
-	$(GDB) $(TEST)/embench.elf $(GDB_RUN_ARGS) $(GDB_RUN_CMDS)
+	$(GDB) $(TEST)/$(TEST).elf $(GDB_RUN_ARGS) $(GDB_RUN_CMDS)
 	
