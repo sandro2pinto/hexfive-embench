@@ -22,7 +22,7 @@ Supported hardware
 
    https://github.com/hex-five/multizone-fpga
    
-* N25 - Andes Technologies RV32IMAC
+* N25 - Andes Technology RV32IMAC
 
    Coming soon ...
 
